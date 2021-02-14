@@ -37,8 +37,18 @@ const getTotalItems = (items: CartItemType[]) =>
 
 
 const handleAddToCart = (clickedItem: CartItemType) => {
+//item is already in the cart
   setCartItems(prev => {
     const isItemInCart = prev.find(item => item.id === clickedItem.id)
+    if(isItemInCart) {
+      return prev.map(item => (
+        item.id === clickedItem.id
+          ? { ...item, amount: item.amount + 1 }
+          : item
+      ))
+    }
+//first time we add an item
+  return [...prev, { ...clickedItem, amount: 1 }]
   })
 }
 
