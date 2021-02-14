@@ -36,7 +36,11 @@ const getTotalItems = (items: CartItemType[]) =>
   items.reduce((accum: number, item) => accum + item.amount, 0)
 
 
-const handleAddToCart = (clickedItem: CartItemType) => null
+const handleAddToCart = (clickedItem: CartItemType) => {
+  setCartItems(prev => {
+    const isItemInCart = prev.find(item => item.id === clickedItem.id)
+  })
+}
 
 const handleRemoveFromCart = () => null
 
