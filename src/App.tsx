@@ -52,7 +52,18 @@ const handleAddToCart = (clickedItem: CartItemType) => {
   })
 }
 
-const handleRemoveFromCart = () => null
+const handleRemoveFromCart = (id: number) => {
+  setCartItems(prev => (
+    prev.reduce((accum, item) => {
+      if(item.id === id) {
+        if(item.amount === 1) return accum
+        return [...accum, {...item, amount: item.amount - 1}]
+      } else {
+        return [...accum, item]
+      }
+    }, [] as CartItemType[])
+  ))
+}
 
 if (isLoading) return <LinearProgress />
 
